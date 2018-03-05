@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+# Visualizing in Python
+
 <html>
 <head><meta charset="utf-8" />
 <title>index</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
