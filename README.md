@@ -1,5 +1,5 @@
 
-# Visualizing Data with Graphs
+# For loops
 
 ### Learning Objectives
 
@@ -7,110 +7,316 @@
 * Understand how to plot a point on a graph, from a point's $x$ and $y$ value
 * Get a sense of how to use a graphing library, like Plotly, to answer questions about our data
 
-### A common problem
+### Picking up where we last left off
 
-Imagine that Molly is selling cupcakes out of her kitchen.  Things are beginning to pick up, and so, she decides to hire her friend Bob to make deliveries.  Molly asks us -- seeing us as a go to problem solver -- to figure out which customers are closest and furthest from Bob.  This way, she can compensate him -- and let's be honest, monitor his performance --  appropriately.
-
-Molly gives us a list of all of the customer locations, along with Bob's.  Here they are:
-
-| Name | Avenue #| Block # | 
-|------|------| ------     |
-| Bob    | 4  |     8     | 
-| Suzie  | 1  |     11     | 
-| Fred   | 5  |     8     | 
-| Edgar  | 6  |     13     | 
-| Steven | 3  |     6     | 
-| Natalie| 5  |     4     | 
-
-Now to figure out is who is closest to Bob you decide to make a graph of each customer's locations, as well as Bob's, in a graph.
-
-### Visualizing Data with Graphs
-
-We want to ease into graphing data, so let's start off with a scatter plot of just one random point, the point $(2, 1)$.
-
-![](./plot-one-point.png)
-
-Ok so that graph above is our first introduction to the **cartesian coordinate system**.  The coordinate system is used to display data along both an x-axis and y-axis.  The **x-axis** runs horizontally, from left to right, and you can see it as the labeled gray line along the bottom.  The **y-axis** runs vertically, from the bottom to the top.  You can see it labeled on the far left of our graph.
-
-Our graph may show the x-axis starting at -4 and the y-axis starting at -1, but that's just the graph.  In reality, you can imagine the x-axis and y-axis both including all numbers from negative infinity to positive infinity.  And that marker in the center of our graph represents the point where $x = 2 $ and $y = 1$.  Do you see why?  Well it's the place where the $x$ value is $2$, and the $y$ value is $1$.  As a shorthand, we mathematicians express this point as $(2, 1)$.  The format is $(x, y) $, with the $x$ coordinate always coming first.
-
-There are light-gray lines forming a grid on the graph to help us see where any given **point** is on a graph.  Now, test your knowledge by moving your mouse to the point $(4, 2)$.  Did you get it?  It's the spot at the top right of the graph.
-
-### Plotting our data
-
-Ok, now let's plot the data given.  
-
-
-| Name | Avenue #| Block # | 
-|------|------| ------     |
-| Bob    | 4  |     8     | 
-| Suzie  | 1  |     11     | 
-| Fred   | 5  |     8     | 
-| Edgar  | 6  |     13     | 
-| Steven | 3  |     6     | 
-| Natalie| 5  |     4     | 
-
-
-We cannot graph the data with python itself, so we need to download a library from the internet.  This is easy enough.  Simply go to your terminal and type in `pip install plotly` followed, by the enter key.  Or you can press shift enter on the cell below.  If you already have `plotly` installed, you will see a message saying that it's already installed -- which you can safely ignore.
+In the last lesson, we plotted some of our travel data.
 
 
 ```python
-!pip install plotly
+import pandas
+file_name = './cities.xlsx'
+travel_df = pandas.read_excel(file_name)
+cities = travel_df.to_dict('records')
 ```
-
-Now we have `plotly` on our computer.  The next step is to get it into this notebook.  We do so with the following two lines.
 
 
 ```python
 import plotly
 
 plotly.offline.init_notebook_mode(connected=True)
-# use offline mode to avoid initial registration
+
+x_values = [cities[0]['City'], cities[1]['City'], cities[2]['City']]
+y_values = [cities[0]['Population'], cities[1]['Population'], cities[2]['Population']]
+
+trace_first_three_pops = {'x': x_values, 'y': y_values, 'type': 'bar'}
+# plotly.offline.iplot([trace_first_three_pops])
 ```
 
 
 <script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script>
 
 
-We bring in the `plotly` library by using the keyword `import` followed by our library name, `plotly`.  We create new dictionary in python with the `dict` constructor.  Then we pass through **named arguments** to the constructor to create a dictionary with an `x` key that points to an array of $x$ values.  Similarly, we create a `y` key with a value of an array of $y$ values. Note that the $x$ values match avenue numbers and the $y$ values match the block numbers.  We display this data by assigning our dictionary to the variable of `trace0`, and passing it through as an argument to the `plotly.offline.iplot` method.  
+Let's take another look at our `x_values` variable. 
 
 
 ```python
-trace0 = dict(x=[4, 1, 5, 6, 3, 2], y=[8, 11, 8, 13, 6, 4])
-
-# All that, and it doesn't even look good :(
-plotly.offline.iplot([trace0])
+x_values = [cities[0]['City'], cities[1]['City'], cities[2]['City']]
 ```
 
+As you can see, we go one by one through the `cities` list, and for each element of the cities list, we retrieve the `City` attribute.  This procedure of going one by one, and doing the same thing can be automated with the `for` loop.
 
-<div id="b3d96e38-ac22-49d2-a5ea-0f81a1d59caf" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("b3d96e38-ac22-49d2-a5ea-0f81a1d59caf", [{"x": [4, 1, 5, 6, 3, 2], "y": [8, 11, 8, 13, 6, 4]}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script>
+### Learning Objectives
 
+### Introduction to the For Loop
 
-The points were plotted correctly, but they are connected by a line, which doesn't represent anything in particular.
-
-Let's remove the lines by setting `mode = "markers"`.  Then, let's also set labels to each of the dots, by setting `text` equal to an array of our names.  
+A `for` loop in Python, is good at going through elements of a list one by one.  Let's take an initial array.
 
 
 ```python
-trace1 = dict(x=[4, 1, 5, 6, 3, 2],
-              y=[8, 11, 8, 13, 6, 4], 
-              mode="markers", 
-              text=["bob", "suzie", "fred", "edgar", "steven", "natalie"],)
+zero_to_three = [0, 1, 2, 3]
+```
+
+Now to print the elements of a list, we currently do the following: 
 
 
-plotly.offline.iplot([trace1])
+```python
+print(zero_to_three[0])
+print(zero_to_three[1])
+print(zero_to_three[2])
+```
 
-# much better :)
+    0
+    1
+    2
+
+
+So we increase the index by one each time, starting at the number zero and ending at the number 2.  A `for` loop is great at going through these elements in the list.  For example:
+
+
+```python
+for i in [0, 1, 2]:
+    print(i + 5)
+```
+
+    5
+    6
+    7
+
+
+So note that above, our expression prints three times: once for each element in our list.  The first time it starts with the number 0, for that is the first element in the array, and then it goes forward to the second element, and then the third.  So we can use the `for` loop to operate on the numbers zero through two, and the `i` represents a successive element in our list each time.
+
+Pay careful attention to the syntax.  Essentially, Python needs to know when the body of the loop begins and when it ends.  So we mark the beginning of the loop's body with a colon, `:`, and then indent each successive line of the loop.  (If you press enter after the colon, the indent will come automatically).  To end the body of the loop, we simply unindent. 
+
+
+```python
+for i in [0, 1, 2]:
+    print(i + 5)
+print(10)
+```
+
+    5
+    6
+    7
+    10
+
+
+Just like any other variable, we can call the `i` whatever we like.  
+
+
+```python
+for number in [0, 1, 2]:
+    print(number + 5)
+```
+
+    5
+    6
+    7
+
+
+We just have to make sure that whatever word we use after `for` is referenced in our loop later on.
+
+
+```python
+for number in [0, 1, 2]:
+    print(what + 5)
 ```
 
 
-<div id="d46f853c-0243-4540-8171-7f902e9ffa77" style="height: 525px; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">require(["plotly"], function(Plotly) { window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("d46f853c-0243-4540-8171-7f902e9ffa77", [{"x": [4, 1, 5, 6, 3, 2], "y": [8, 11, 8, 13, 6, 4], "mode": "markers", "text": ["bob", "suzie", "fred", "edgar", "steven", "natalie"]}], {}, {"showLink": true, "linkText": "Export to plot.ly"})});</script>
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-23-ba9129ae8cfe> in <module>()
+          1 for number in [0, 1, 2]:
+    ----> 2     print(what + 5)
+    
+
+    NameError: name 'what' is not defined
 
 
-Ok, so if you move your mouse over the dots, you can see the names that correspond to each point.  Also, when we hover over the dot at the x axis of point four, we can see that is Bob's point, just like it should be.  Now, who is closest to Bob?  It looks like Fred is, so that is the delivery that is easiest for Bob.
+### Using list elements as indices
+
+In the above section we iterated through a list of successive numbers.  Now remember that to access elements of any lists, we use a number to do so.
+
+
+```python
+countries = ['Croatia', 'USA', 'Argentina']
+```
+
+
+```python
+countries[0]
+```
+
+
+
+
+    'Croatia'
+
+
+
+
+```python
+countries[2]
+```
+
+
+
+
+    'Argentina'
+
+
+
+So to iterate through the elements of `countries`, we can do the following:  
+
+
+```python
+for i in [0, 1, 2]:
+    print(countries[i])
+```
+
+    Croatia
+    USA
+    Argentina
+
+
+So notice what happened there.  Just like previously, our loop variable, `i`, is a different element of the list each time.  Because these elements are also the increasing indices for our list of `countries`, we can use them to access and then operate on the elements of the `countries`.
+
+
+```python
+for i in [0, 1, 2]:
+    print(i)
+    print(countries[i])
+```
+
+    0
+    Croatia
+    1
+    USA
+    2
+    Argentina
+
+
+Of course, this only works if the elements of the list match up with the size of our list.  So it would be nice to perform some calculation to ensure that this is the case.  Let's do it.
+
+We can use the `len` function to calculate the size of our list.
+
+
+```python
+len(countries)
+```
+
+
+
+
+    3
+
+
+
+Then we can turn this length into a successive list of elements with the following:
+
+First, create a range object:
+
+
+```python
+range(0, len(countries))
+```
+
+
+
+
+    range(0, 3)
+
+
+
+And then convert this into a list:
+
+
+```python
+list(range(0, len(countries)))
+```
+
+
+
+
+    [0, 1, 2]
+
+
+
+Note that the range object is marking the starting and ending point, and excluding the end.  So this works perfectly:
+
+
+```python
+for i in list(range(0, len(countries))):
+    print(countries[i])
+```
+
+    Croatia
+    USA
+    Argentina
+
+
+And as we add or subtract countries, we will still be iterating through our list elements.
+
+
+```python
+countries = ['Croatia', 'USA', 'Argentina']
+countries.append('Mexico')
+for i in list(range(0, len(countries))):
+    print(countries[i])
+```
+
+    Croatia
+    USA
+    Argentina
+    Mexico
+
+
+### Iterating through different datatypes
+
+So far our loop variable has always been an element of a list that is a number.  However, our block variable can represent any data type.  For example, let's have the block variable represent each of the countries directly:
+
+
+```python
+countries = ['Croatia', 'USA', 'Argentina']
+for i in countries:
+    print(i)
+```
+
+    Croatia
+    USA
+    Argentina
+
+
+So now `i` points to each element of the `countries` list.  We previously used `i` as `i` was equal to an index of a list.  However, here our block variable will equal an individual country.  Might as well be expressive:
+
+
+```python
+for country in countries:
+    print(country)
+```
+
+    Croatia
+    USA
+    Argentina
+
+
+This is a standard pattern.  The variable name pointing to a list is plural, and to refer to a singular element as a loop variable, use the singular version.  So if we were printing out a list of friends name, we would write it as the following:
+
+
+```python
+friends = ['Bob', 'Sally', 'Fred']
+for friend in friends:
+    print(friend)
+```
+
+    Bob
+    Sally
+    Fred
+
+
+And there we are printing out a list of friends.
 
 ### Summary
 
-In this section, we saw how we use data visualisations to better understand the data.  A cartesian coordinate system nicely represents two dimensional data.  It allows us to represent a point's $x$ value by placing the point horizontally at the correct spot on the x-axis.  It represents a point's $y$ value by placing the point at the correct spot along the y-axis.
-
-To display the data with `plotly` we need to do a couple of things.  First, we install plotly by going to our terminal and running `pip install plotly`.  Then to use the library, we import the `plotly` library into our notebook.  Once the library is loaded in our notebook, it's time to use it.  We create a new dictionary with keys of $x$ and $y$, with each key pointing to an array of the $x$ or $y$ values of our points.  To clean up the appearance we set the `mode` attribute equal to `'markers'`.
+In this section, we saw how we can use loops to iterate through various elements.  This is a very powerful 
