@@ -41,11 +41,17 @@ Let's take another look at our `x_values` variable.
 
 ```python
 x_values = [cities[0]['City'], cities[1]['City'], cities[2]['City']]
+x_values
 ```
 
-As you can see, we go one by one through the `cities` list, and for each element of the cities list, we retrieve the `City` attribute.  This procedure of going one by one, and doing the same thing can be automated with the `for` loop.
 
-### Learning Objectives
+
+
+    ['Solta', 'Greenville', 'Buenos Aires']
+
+
+
+As you can see, we go one by one through the `cities` list, and for each element of the cities list, we retrieve the `City` attribute.  This procedure of going one by one, and doing the same thing can be automated with the `for` loop.
 
 ### Introduction to the For Loop
 
@@ -122,11 +128,11 @@ for number in [0, 1, 2]:
 ```
 
 
-    ---------------------------------------------------------------------------
+    ----------------------------------------------------------
 
-    NameError                                 Traceback (most recent call last)
+    NameError                Traceback (most recent call last)
 
-    <ipython-input-23-ba9129ae8cfe> in <module>()
+    <ipython-input-11-88d28996dc39> in <module>()
           1 for number in [0, 1, 2]:
     ----> 2     print(what + 5)
     
@@ -288,7 +294,7 @@ for i in countries:
     Argentina
 
 
-So now `i` points to each element of the `countries` list.  We previously used `i` as `i` was equal to an index of a list.  However, here our block variable will equal an individual country.  Might as well be expressive:
+So now `i` points to each element of the `countries` list.  We previously used `i` as `i` was equal to an index of a list.  However, in this example our block variable will equal an individual country.  So, we might as well be expressive:
 
 
 ```python
