@@ -3,55 +3,7 @@
 
 ### Learning Objectives
 
-* Understand the components of a point in a graph, an $x$ value, and a $y$ value 
-* Understand how to plot a point on a graph, from a point's $x$ and $y$ value
-* Get a sense of how to use a graphing library, like Plotly, to answer questions about our data
-
-### Picking up where we last left off
-
-In the last lesson, we plotted some of our travel data.
-
-
-```python
-import pandas
-file_name = './cities.xlsx'
-travel_df = pandas.read_excel(file_name)
-cities = travel_df.to_dict('records')
-```
-
-
-```python
-import plotly
-
-plotly.offline.init_notebook_mode(connected=True)
-
-x_values = [cities[0]['City'], cities[1]['City'], cities[2]['City']]
-y_values = [cities[0]['Population'], cities[1]['Population'], cities[2]['Population']]
-
-trace_first_three_pops = {'x': x_values, 'y': y_values, 'type': 'bar'}
-# plotly.offline.iplot([trace_first_three_pops])
-```
-
-
-<script>requirejs.config({paths: { 'plotly': ['https://cdn.plot.ly/plotly-latest.min']},});if(!window.Plotly) {{require(['plotly'],function(plotly) {window.Plotly=plotly;});}}</script>
-
-
-Let's take another look at our `x_values` variable. 
-
-
-```python
-x_values = [cities[0]['City'], cities[1]['City'], cities[2]['City']]
-x_values
-```
-
-
-
-
-    ['Solta', 'Greenville', 'Buenos Aires']
-
-
-
-As you can see, we go one by one through the `cities` list, and for each element of the cities list, we retrieve the `City` attribute.  This procedure of going one by one, and doing the same thing can be automated with the `for` loop.
+* Understand how `for` loops can allow us to perform the same operations on different data 
 
 ### Introduction to the For Loop
 
@@ -62,7 +14,7 @@ A `for` loop in Python, is good at going through elements of a list one by one. 
 zero_to_three = [0, 1, 2, 3]
 ```
 
-Now to print the elements of a list, we currently do the following: 
+Now to print the elements of a list, we could do the following: 
 
 
 ```python
@@ -71,12 +23,9 @@ print(zero_to_three[1])
 print(zero_to_three[2])
 ```
 
-    0
-    1
-    2
+> Press shift + enter
 
-
-So we increase the index by one each time, starting at the number zero and ending at the number 2.  A `for` loop is great at going through these elements in the list.  For example:
+So in the code above, we increased the index by one each time, going from the 0 to 1 to 2.  A `for` loop is great at going through sequential elements in a list, like 0 through 2.  For example:
 
 
 ```python
@@ -84,14 +33,11 @@ for i in [0, 1, 2]:
     print(i + 5)
 ```
 
-    5
-    6
-    7
+> Again, press shift + enter
 
+So above, our expression prints three times -- once for each element in our list.  The first time it starts with the number 0, as that is the first element in the array.  Then it goes forward to the second element, and then the third.  So we can use the `for` loop to operate on the numbers zero through two, and the `i` represents a successive element in our list each time.
 
-So note that above, our expression prints three times: once for each element in our list.  The first time it starts with the number 0, for that is the first element in the array, and then it goes forward to the second element, and then the third.  So we can use the `for` loop to operate on the numbers zero through two, and the `i` represents a successive element in our list each time.
-
-Pay careful attention to the syntax.  Essentially, Python needs to know when the body of the loop begins and when it ends.  So we mark the beginning of the loop's body with a colon, `:`, and then indent each successive line of the loop.  (If you press enter after the colon, the indent will come automatically).  To end the body of the loop, we simply unindent. 
+Pay careful attention to the syntax.  What is that colon at the end of the first line?  Essentially, Python needs to know when the body of the loop begins and when it ends.  So we mark the beginning of the loop's body with a colon, `:`, and then indent each successive line of the loop.  (If you press enter after the colon, the next line will automatically indent).  To end the body of the loop, we simply unindent. 
 
 
 ```python
@@ -100,13 +46,7 @@ for i in [0, 1, 2]:
 print(10)
 ```
 
-    5
-    6
-    7
-    10
-
-
-Just like any other variable, we can call the `i` whatever we like.  
+Just like any other variable, we can call the `i` whatever we like.  Below, we call it `number`.
 
 
 ```python
@@ -114,12 +54,7 @@ for number in [0, 1, 2]:
     print(number + 5)
 ```
 
-    5
-    6
-    7
-
-
-We just have to make sure that whatever word we use after `for` is referenced in our loop later on.
+Whichever word we place after the `for` keyword will be the name of our loop variable to reference later on.  If we are inconsistent, we receive an error.
 
 
 ```python
@@ -127,66 +62,20 @@ for number in [0, 1, 2]:
     print(what + 5)
 ```
 
-
-    ----------------------------------------------------------
-
-    NameError                Traceback (most recent call last)
-
-    <ipython-input-11-88d28996dc39> in <module>()
-          1 for number in [0, 1, 2]:
-    ----> 2     print(what + 5)
-    
-
-    NameError: name 'what' is not defined
-
+> Press shift + enter
 
 ### Using list elements as indices
 
-In the above section we iterated through a list of successive numbers.  Now remember that to access elements of any lists, we use a number to do so.
+In the above section we iterated through a list of successive numbers.  But we can also use our `for` loop to access successive elements of a separate list, like so.
 
 
 ```python
 countries = ['Croatia', 'USA', 'Argentina']
-```
-
-
-```python
-countries[0]
-```
-
-
-
-
-    'Croatia'
-
-
-
-
-```python
-countries[2]
-```
-
-
-
-
-    'Argentina'
-
-
-
-So to iterate through the elements of `countries`, we can do the following:  
-
-
-```python
 for i in [0, 1, 2]:
     print(countries[i])
 ```
 
-    Croatia
-    USA
-    Argentina
-
-
-So notice what happened there.  Just like previously, our loop variable, `i`, is a different element of the list each time.  Because these elements are also the increasing indices for our list of `countries`, we can use them to access and then operate on the elements of the `countries`.
+So notice what happened there.  Just like previously, our loop variable, `i`, is an increasing number for each iteration.  Because these successive numbers are also successive indices of our `countries` list, we can use them to access and then operate on the elements of the `countries`.
 
 
 ```python
@@ -195,17 +84,16 @@ for i in [0, 1, 2]:
     print(countries[i])
 ```
 
-    0
-    Croatia
-    1
-    USA
-    2
-    Argentina
+Of course, this does not work if we have more number of iterations does not match up with the size of our list.
 
 
-Of course, this only works if the elements of the list match up with the size of our list.  So it would be nice to perform some calculation to ensure that this is the case.  Let's do it.
+```python
+for i in [0, 1, 2, 3]:
+    print(i)
+    print(countries[i])
+```
 
-We can use the `len` function to calculate the size of our list.
+So it would be nice to perform some calculation to ensure that this is the case.  Let's do it.  We can use the `len` function to calculate the size of our list.
 
 
 ```python
@@ -219,7 +107,7 @@ len(countries)
 
 
 
-Then we can turn this length into a successive list of elements with the following:
+Then we can turn this length into a successive list of elements with the following.  
 
 First, create a range object:
 
@@ -280,7 +168,7 @@ for i in list(range(0, len(countries))):
 
 ### Iterating through different datatypes
 
-So far our loop variable has always been an element of a list that is a number.  However, our block variable can represent any data type.  For example, let's have the block variable represent each of the countries directly:
+So far our loop variable has always been an element of a list that is a number.  However, our loop variable can represent any data type.  For example, let's have the loop variable represent each of the countries directly:
 
 
 ```python
@@ -294,7 +182,7 @@ for i in countries:
     Argentina
 
 
-So now `i` points to each element of the `countries` list.  We previously used `i` as `i` was equal to an index of a list.  However, in this example our block variable will equal an individual country.  So, we might as well be expressive:
+So now `i` points to each element of the `countries` list.  We previously used `i` as `i` was equal to an index of a list.  However, here our loop variable will equal an individual country.  Might as well be expressive:
 
 
 ```python
@@ -325,4 +213,4 @@ And there we are printing out a list of friends.
 
 ### Summary
 
-In this section, we saw how we can use loops to iterate through various elements.  This is a very powerful 
+In this section, we saw how we can use loops to iterate through various elements.  We started with iterating through a list of numbers, and performed the same operation on each number.  Then we saw how we can loop through the numbers and have each number be used to access a successive element from a separate list, like `countries`.  We showed that to ensure that our list of numbers matched the indices of a separate list, we could use the expression, `for element in list(range(0, len(list)))`.  Finally, we saw that we can also just iterate through the list of elements directly as in the expression, `for friend in friends:`.
