@@ -35,7 +35,8 @@ for i in [0, 1, 2]:
 
 > Again, press shift + enter
 
-So above, our expression prints three times -- once for each element in our list.  The first time it starts with the number 0, as that is the first element in the array.  Then it goes forward to the second element, and then the third.  So we can use the `for` loop to operate on the numbers zero through two, and the `i` represents a successive element in our list each time.
+So above, our expression prints three times -- once for each element in our list.  The first time it starts with the number 0, as that is the first element in the array.  Then it goes forward to the second element
+and then the third.  So we can use the `for` loop to operate on the numbers zero through two, and the `i` represents a successive element in our list each time.
 
 Pay careful attention to the syntax.  What is that colon at the end of the first line?  Essentially, Python needs to know when the body of the loop begins and when it ends.  So we mark the beginning of the loop's body with a colon, `:`, and then indent each successive line of the loop.  (If you press enter after the colon, the next line will automatically indent).  To end the body of the loop, we simply unindent. 
 
@@ -75,7 +76,7 @@ for i in [0, 1, 2]:
     print(countries[i])
 ```
 
-So notice what happened there.  Just like previously, our loop variable, `i`, is an increasing number for each iteration.  Because these successive numbers are also successive indices of our `countries` list, we can use them to access and then operate on the elements of the `countries`.
+So notice what happened there.  Just like we did previously, our loop variable, `i`, is an increasing number for each iteration.  Because these successive numbers are also successive indices of our `countries` list, we can use them to access and then operate on the elements of the `countries`.
 
 
 ```python
@@ -182,7 +183,7 @@ for i in countries:
     Argentina
 
 
-So now `i` points to each element of the `countries` list.  We previously used `i` as `i` was equal to an index of a list.  However, here our loop variable will equal an individual country.  Might as well be expressive:
+So now `i` points to each element of the `countries` list.  We previously used `i` since it was equal to the `index` of a list.  However, here our loop variable will equal an individual country.  Might as well be expressive:
 
 
 ```python
@@ -195,7 +196,7 @@ for country in countries:
     Argentina
 
 
-This is a standard pattern.  The variable name pointing to a list is plural, and to refer to a singular element as a loop variable, use the singular version.  So if we were printing out a list of friends name, we would write it as the following:
+This is a standard pattern.  The variable name pointing to a list is plural, and to refer to a singular element as a loop variable, use the singular version.  So if we were printing out a list of our friends names, we would write it as the following:
 
 
 ```python
