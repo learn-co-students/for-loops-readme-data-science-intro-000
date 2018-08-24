@@ -1,112 +1,111 @@
 
 # For loops
 
+## Introduction
+Programming is all about making things my dynamic and more efficient, right? Well a big part of making our code more efficient and dynamic are loops! They allow us to iterate over each element in a collection, like a list. Perhaps we could already do that by writing out a line of code for each element in the collection, but that wouldn't be very efficient, would it? No, not at all. With loops, we can write one line of code that operates on each element in a collection. Pretty cool, right? Let's get started!
+
 ### Learning Objectives
 
-* Understand how `for` loops can allow us to perform the same operations on different data 
+* Understand how to write a for loop
+* See different ways for loops can be used
 
-### Introduction to the For Loop
+## What is a for loop and how do I write one?
 
-A `for` loop in Python, is good at going through elements of a list one by one.  Let's take an initial array.
+A `for` loop in Python, is primarily used for going through elements of a list one by one. We'll use a simple collection with 4 elements `0,1,2,3` as an example. Without a loop, if we wanted to print each element of the list we'd have to write it out like we do below:
 
 
 ```python
 zero_to_three = [0, 1, 2, 3]
 ```
 
-Now to print the elements of a list, we could do the following: 
-
 
 ```python
 print(zero_to_three[0])
 print(zero_to_three[1])
 print(zero_to_three[2])
+print(zero_to_three[3])
 ```
 
 > Press shift + enter
 
-So in the code above, we increased the index by one each time, going from the 0 to 1 to 2.  A `for` loop is great at going through sequential elements in a list, like 0 through 2.  For example:
+In the example above, we are sequentially accessing each index in the list and printing its value (the element). That works well enough, but if our list were 100 element long it would become extrememly tedious. And what if the length of our list were ***unkown***. Spooky, right? 
+
+In fact, it may very often be the case that we don't know the length of the collection we are working with. So, writing all this static code for each element becomes not only unmanageable, but impossible.
+
+Let's see how we would do the same operation above with a for loop!
 
 
 ```python
-for i in [0, 1, 2]:
-    print(i + 5)
+for number in zero_to_three:
+    print(number)
 ```
 
-> Again, press shift + enter
+Great! We were able to reproduce the exact same functionality as we had previously. However, in this example, we used only **2** lines of code. 
 
-So above, our expression prints three times -- once for each element in our list.  The first time it starts with the number 0, as that is the first element in the array.  Then it goes forward to the second element
-and then the third.  So we can use the `for` loop to operate on the numbers zero through two, and the `i` represents a successive element in our list each time.
+Now, the for loop may look a bit confusing at first, so, let's take a closer look at the syntax. A for loop essentially has two necessary components, which we'll refer to as arguments. The first argument is the variable name we are assigning to an element, or in this case, `number`. The second argument is the collection we are iterating over, or in this case, the list `zero_to_three`.
 
-Pay careful attention to the syntax.  What is that colon at the end of the first line?  Essentially, Python needs to know when the body of the loop begins and when it ends.  So we mark the beginning of the loop's body with a colon, `:`, and then indent each successive line of the loop.  (If you press enter after the colon, the next line will automatically indent).  To end the body of the loop, we simply unindent. 
+We can give any name to the variable. The important thing to understand here is **it is the reference** to each **element** in the collection. So, when we print `number`, we are printing an element of the collection `zero_to_three`. 
+
+Every for loop needs to end the first line with a colon `:`. This indicates the start of the **block** of code. The block is simply the code that we want executed in each iteration of our loop. So, if all we want to do is print each element, then the line that prints the element is our block. Our block is indicated by indenting. So the first line after the colon `:` should be indented. When we want to end our block, we simply stop indenting. Any code follwing the for loop will only be executed after the for loop finishes.
+
+> *Remember, the block of code in a for loop is executed the same amount of times as there are elements in the collection.*
+
+Let's take a look at changing the variable names and adding more code to our example:
 
 
 ```python
-for i in [0, 1, 2]:
-    print(i + 5)
-print(10)
+iteration_count = 0
+for whatever_we_want in zero_to_three:
+    iteration_count += 1
+    print("This is iteration:", iteration_count)
+    print(whatever_we_want)
+print("The for loop is finished now! I am not in the for loop block, which is why I only printed once!")
 ```
 
-Just like any other variable, we can call the `i` whatever we like.  Below, we call it `number`.
+## Using list elements as indices
+
+In the examples above, we used the elements in our list to perform an operation, which was printing them. We can also use a list of numbers to access elements from another list. Let's take a look at an example.
 
 
 ```python
-for number in [0, 1, 2]:
-    print(number + 5)
+countries = ['Croatia', 'USA', 'Argentina', 'France', 'Brazil', 'Japan', 'Vietnam', 'Israel']
 ```
 
-Whichever word we place after the `for` keyword will be the name of our loop variable to reference later on.  If we are inconsistent, we receive an error.
-
 
 ```python
-for number in [0, 1, 2]:
-    print(what + 5)
+for index in [0,1,2,3,4,5,6,7]:
+    print(index)
+    print(countries[index])
 ```
 
-> Press shift + enter
-
-### Using list elements as indices
-
-In the above section we iterated through a list of successive numbers.  But we can also use our `for` loop to access successive elements of a separate list, like so.
+So, in the example above, we are still using the elements in the list of numbers from 0 to 7 in our for loop, but we are instead using them to access each element of another list. This example is a bit contrived, but perhaps you have two lists that are ordered correctly and have information like the capital cities in one list and the the corresponding countries in another. How would we print both of those out in the same line?
 
 
 ```python
-countries = ['Croatia', 'USA', 'Argentina']
-for i in [0, 1, 2]:
-    print(countries[i])
+countries = ['Croatia', 'USA', 'Argentina', 'France', 'Brazil', 'Japan', 'Vietnam', 'Israel']
+cities = ['Zagreb', 'Distric of Columbia', 'Buenos Aires', 'Paris', 'Rio de Janeiro', 'Tokyo', 'Hanoi', 'Tel Aviv']
 ```
 
-So notice what happened there.  Just like we did previously, our loop variable, `i`, is an increasing number for each iteration.  Because these successive numbers are also successive indices of our `countries` list, we can use them to access and then operate on the elements of the `countries`.
-
 
 ```python
-for i in [0, 1, 2]:
-    print(i)
-    print(countries[i])
+for index in [0,1,2,3,4,5,6,7]:
+    print(cities[index]+",", countries[index])
 ```
 
 Of course, this does not work if we have more number of iterations does not match up with the size of our list.
 
 
 ```python
-for i in [0, 1, 2, 3]:
-    print(i)
-    print(countries[i])
+for index in [0,1,2,3,4,5,6,7,8,9,10]:
+    print(cities[index]+",", countries[index])
 ```
 
-So it would be nice to perform some calculation to ensure that this is the case.  Let's do it.  We can use the `len` function to calculate the size of our list.
+So, the preferred way of figuring out the amount of iterations on a list when you are unsure of its length would be to use the `len` function to calculate the size of the list.
 
 
 ```python
 len(countries)
 ```
-
-
-
-
-    3
-
-
 
 Then we can turn this length into a successive list of elements with the following.  
 
@@ -117,13 +116,6 @@ First, create a range object:
 range(0, len(countries))
 ```
 
-
-
-
-    range(0, 3)
-
-
-
 And then convert this into a list:
 
 
@@ -131,59 +123,38 @@ And then convert this into a list:
 list(range(0, len(countries)))
 ```
 
-
-
-
-    [0, 1, 2]
-
-
-
 Note that the range object is marking the starting and ending point, and excluding the end.  So this works perfectly:
 
 
 ```python
 for i in list(range(0, len(countries))):
-    print(countries[i])
+    print(cities[index]+",", countries[index])
 ```
-
-    Croatia
-    USA
-    Argentina
-
 
 And as we add or subtract countries, we will still be iterating through our list elements.
 
 
 ```python
-countries = ['Croatia', 'USA', 'Argentina']
 countries.append('Mexico')
+cities.append('Mexico City')
 for i in list(range(0, len(countries))):
-    print(countries[i])
+    print(cities[index]+",", countries[index])
 ```
 
-    Croatia
-    USA
-    Argentina
-    Mexico
-
-
-### Iterating through different datatypes
+## Iterating through different datatypes
 
 So far our loop variable has always been an element of a list that is a number.  However, our loop variable can represent any data type.  For example, let's have the loop variable represent each of the countries directly:
 
 
 ```python
-countries = ['Croatia', 'USA', 'Argentina']
-for i in countries:
-    print(i)
+different_elements = ['A String', ["a", 'list', "of", 5, ["elements"]], {'this': "is a dictionary"}]
+for element in different_elements:
+    print(element)
 ```
 
-    Croatia
-    USA
-    Argentina
+## Conventional Naming Patterns
 
-
-So now `i` points to each element of the `countries` list.  We previously used `i` since it was equal to the `index` of a list.  However, here our loop variable will equal an individual country.  Might as well be expressive:
+Typically, when we are looping through a collection of things like `countries`, we will name the looping variable, `country`, since that is the singular version of the plural name that represents our list. This is convention and helps to not only remind us, but tell other people looking at our code what that variable is. Let's take a look at a couple examples.
 
 
 ```python
@@ -191,27 +162,13 @@ for country in countries:
     print(country)
 ```
 
-    Croatia
-    USA
-    Argentina
-
-
-This is a standard pattern.  The variable name pointing to a list is plural, and to refer to a singular element as a loop variable, use the singular version.  So if we were printing out a list of our friends names, we would write it as the following:
-
 
 ```python
-friends = ['Bob', 'Sally', 'Fred']
-for friend in friends:
-    print(friend)
+ice_cream_flavors = ['Mint Chocolate Chip', 'Coffee', 'Cookie Dough', 'Fudge Mint Brownie', 'Vanilla Bean']
+for ice_cream_flavor in ice_cream_flavors:
+    print('I love ' + ice_cream_flavor + ' ice cream!!')
 ```
-
-    Bob
-    Sally
-    Fred
-
-
-And there we are printing out a list of friends.
 
 ### Summary
 
-In this section, we saw how we can use loops to iterate through various elements.  We started with iterating through a list of numbers, and performed the same operation on each number.  Then we saw how we can loop through the numbers and have each number be used to access a successive element from a separate list, like `countries`.  We showed that to ensure that our list of numbers matched the indices of a separate list, we could use the expression, `for element in list(range(0, len(list)))`.  Finally, we saw that we can also just iterate through the list of elements directly as in the expression, `for friend in friends:`.
+In this lesson, we learned how to use loops to iterate through a collection of elements. We started with iterating through a list of numbers, and performed the same operation on each number. Then we saw how we can loop through the numbers and have each number be used to access a successive element from a separate list, like `countries`.  We then saw that to ensure that our list of numbers matched the indices of a our other list, we had to use the expression, `for element in list(range(0, len(list)))`. Finally, we introduced a naming convention that is commonly used when naming the variable for our loops when iterating over a collection that is a list of common elements (i.e. `ice_cream_flavor` for a list of `ice_cream_flavors`).
