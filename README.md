@@ -152,6 +152,40 @@ for element in different_elements:
     print(element)
 ```
 
+Now that we know we can iterate through a list that contains multiple data types, let's explore iterating through a data type that's **not a list**. 
+
+Another collection we commonly will iterate over is a **dictionary**. Dictionaries differ from list, on a high level, in that elements are **key, value pairs** instead of one single element. So, when we go through each item in a dictionary, we are actually working with a two-part element (with a key & value). Similarly to how we name a variable for the element in a list for a for loop, we name a variable for both the **key** and **value** when we iterate over a dictionary. However, in Python, we can't iterate directly over the dictionary, we iterate over the **items** of a dictionary, which are the key value pairs.  Let's take a look at an example.
+
+
+```python
+example_dictionary = {'first_name': "Terrance", 'last_name': "KOAR", 'favorite_language': "Python"}
+print(example_dictionary.items())
+type(example_dictionary.items())
+```
+
+Here we can see this **dict_items** object looks almost like a list, but each item has **two** parts, the **key** and **value**. So, in our first iteration, the first **key** will be **first_name**, and the first **value** will be **Terrance**.
+
+
+```python
+for key, value in example_dictionary.items():
+    print("this is the key:", key)    
+    print("this is the value:", value, "\n")
+```
+
+So, we can see that the **dict_items** object groups the key values together in a way that we can iterate over them and access them. We can even use them to inform our program to operate on keys and values in a certain way. Such as, the last name is inexplicably in all caps. Let's look at how we can rectify that and title case the last name when we print out the full name of the `example_dictionary` object.
+
+
+```python
+first_name = ""
+last_name = ""
+for key, value in example_dictionary.items():
+    if key == "last_name":
+        last_name = value.title()
+    if key == "first_name":
+        first_name = value
+print(first_name, last_name)
+```
+
 ## Conventional Naming Patterns
 
 Typically, when we are looping through a collection of things like `countries`, we will name the looping variable, `country`, since that is the singular version of the plural name that represents our list. This is convention and helps to not only remind us, but tell other people looking at our code what that variable is. Let's take a look at a couple examples.
