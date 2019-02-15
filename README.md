@@ -28,7 +28,7 @@ print(zero_to_three[3])
 
 > Press shift + enter
 
-In the example above, we are sequentially accessing each index in the list and printing its value (the element). That works well enough, but if our list were 100 element long it would become extrememly tedious. And what if the length of our list were ***unkown***. Spooky, right? 
+In the example above, we are sequentially accessing each index in the list and printing its value (the element). That works well enough, but if our list were 100 element long it would become extrememly tedious. And what if the length of our list were ***unknown***. Spooky, right? 
 
 In fact, it may very often be the case that we don't know the length of the collection we are working with. So, writing all this static code for each element becomes not only unmanageable, but impossible.
 
@@ -127,7 +127,7 @@ Note that the range object is marking the starting and ending point, and excludi
 
 
 ```python
-for i in list(range(0, len(countries))):
+for index in list(range(0, len(countries))):
     print(cities[index]+",", countries[index])
 ```
 
