@@ -6,8 +6,8 @@ Programming is all about making things my dynamic and more efficient, right? Wel
 
 ### Learning Objectives
 
-* Understand how to write a for loop
-* See different ways for loops can be used
+- Understand how to write a for loop
+- See different ways for loops can be used
 
 ## What is a for loop and how do I write one?
 
