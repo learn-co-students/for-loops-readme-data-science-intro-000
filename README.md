@@ -92,7 +92,7 @@ for index in [0,1,2,3,4,5,6,7]:
     print(cities[index]+",", countries[index])
 ```
 
-Of course, this does not work if we have more number of iterations does not match up with the size of our list.
+Of course, this does not work if the number of iterations does not match up with the size of our list.
 
 
 ```python
