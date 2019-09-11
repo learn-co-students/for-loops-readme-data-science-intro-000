@@ -6,8 +6,8 @@ Programming is all about making things my dynamic and more efficient, right? Wel
 
 ### Learning Objectives
 
-- Understand how to write a for loop
-- See different ways for loops can be used
+* Understand how to write a for loop
+* See different ways for loops can be used
 
 ## What is a for loop and how do I write one?
 
@@ -92,7 +92,7 @@ for index in [0,1,2,3,4,5,6,7]:
     print(cities[index]+",", countries[index])
 ```
 
-Of course, this does not work if we have more number of iterations does not match up with the size of our list.
+Of course, this does not work if the number of iterations does not match up with the size of our list.
 
 
 ```python
