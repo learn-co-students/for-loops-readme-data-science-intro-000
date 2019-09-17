@@ -131,7 +131,7 @@ for index in list(range(0, len(countries))):
     print(cities[index]+",", countries[index])
 ```
 
-And as we add or subtract countries, we will still be iterating through our list elements.
+And as we add or subtract countries, we will still be iterating through our list elements:
 
 
 ```python
