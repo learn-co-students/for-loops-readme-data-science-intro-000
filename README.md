@@ -11,7 +11,7 @@ Programming is all about making things my dynamic and more efficient, right? Wel
 
 ## What is a for loop and how do I write one?
 
-A `for` loop in Python, is primarily used for going through elements of a list one by one. We'll use a simple collection with 4 elements `0,1,2,3` as an example. Without a loop, if we wanted to print each element of the list we'd have to write it out like we do below:
+A `for` loop in Python, is primarily used for going through the elements of a list one by one. We'll use a simple collection with 4 elements `0,1,2,3` as an example. Without a loop, if we wanted to print each element of the list we'd have to write it out like we do below:
 
 
 ```python
