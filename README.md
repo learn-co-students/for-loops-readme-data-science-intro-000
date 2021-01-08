@@ -2,12 +2,12 @@
 # For loops
 
 ## Introduction
-Programming is all about making things my dynamic and more efficient, right? Well a big part of making our code more efficient and dynamic are loops! They allow us to iterate over each element in a collection, like a list. Perhaps we could already do that by writing out a line of code for each element in the collection, but that wouldn't be very efficient, would it? No, not at all. With loops, we can write one line of code that operates on each element in a collection. Pretty cool, right? Let's get started!
+Programming is all about making things more dynamic and effcient. Well, a big part of making our code more efficient and dynamic are "loops", They allow us to iterate over each element in a collection, like a list. Perhaps we could already do that by writing out a line of code for each element in a collection, but that wouldn't be very efficient. With loops, we can write one line of code that operates on each element in a collection. Let's get started!
 
 ### Learning Objectives
 
-* Understand how to write a for loop
-* See different ways for loops can be used
+* Understand how to write a for loop in python
+* See different ways in which for loops can be used
 
 ## What is a for loop and how do I write one?
 
